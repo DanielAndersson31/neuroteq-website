@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  neuroteq-web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: neuroteq-website
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - ORIGIN=https://neuroteq.com
+      - PROTOCOL_HEADER=x-forwarded-proto
+      - HOST_HEADER=x-forwarded-host
+    networks:
+      - web
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+networks:
+  web:
+    driver: bridge

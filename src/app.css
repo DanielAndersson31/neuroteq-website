@@ -1,0 +1,263 @@
+@import "tailwindcss";
+
+/* Custom CSS Variables for Neuroteq Brand */
+@theme {
+	/* Primary - Deep Teal/Blue */
+	--color-primary-50: oklch(0.97 0.01 200);
+	--color-primary-100: oklch(0.93 0.03 200);
+	--color-primary-200: oklch(0.86 0.06 200);
+	--color-primary-300: oklch(0.76 0.09 200);
+	--color-primary-400: oklch(0.64 0.12 200);
+	--color-primary-500: oklch(0.52 0.14 200);
+	--color-primary-600: oklch(0.44 0.13 200);
+	--color-primary-700: oklch(0.37 0.11 200);
+	--color-primary-800: oklch(0.31 0.09 200);
+	--color-primary-900: oklch(0.26 0.07 200);
+	--color-primary-950: oklch(0.18 0.05 200);
+
+	/* Accent - Teal */
+	--color-accent-50: oklch(0.97 0.02 180);
+	--color-accent-100: oklch(0.93 0.04 180);
+	--color-accent-200: oklch(0.86 0.08 180);
+	--color-accent-300: oklch(0.76 0.12 180);
+	--color-accent-400: oklch(0.64 0.14 180);
+	--color-accent-500: oklch(0.52 0.15 180);
+	--color-accent-600: oklch(0.44 0.14 180);
+	--color-accent-700: oklch(0.37 0.12 180);
+	--color-accent-800: oklch(0.31 0.10 180);
+	--color-accent-900: oklch(0.26 0.08 180);
+
+	/* shadcn-svelte compatible colors */
+	--color-background: hsl(0 0% 100%);
+	--color-foreground: hsl(222.2 84% 4.9%);
+	--color-card: hsl(0 0% 100%);
+	--color-card-foreground: hsl(222.2 84% 4.9%);
+	--color-popover: hsl(0 0% 100%);
+	--color-popover-foreground: hsl(222.2 84% 4.9%);
+	--color-primary: hsl(186 80% 25%);
+	--color-primary-foreground: hsl(0 0% 100%);
+	--color-secondary: hsl(180 60% 30%);
+	--color-secondary-foreground: hsl(0 0% 100%);
+	--color-muted: hsl(210 40% 96.1%);
+	--color-muted-foreground: hsl(215.4 16.3% 46.9%);
+	--color-accent: hsl(180 60% 30%);
+	--color-accent-foreground: hsl(0 0% 100%);
+	--color-destructive: hsl(0 84.2% 60.2%);
+	--color-destructive-foreground: hsl(0 0% 100%);
+	--color-border: hsl(214.3 31.8% 91.4%);
+	--color-input: hsl(214.3 31.8% 91.4%);
+	--color-ring: hsl(186 80% 25%);
+
+	/* Font Families */
+	--font-sans: "Inter", system-ui, -apple-system, sans-serif;
+	--font-heading: "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
+	--font-mono: "JetBrains Mono", "Fira Code", monospace;
+
+	/* Radius */
+	--radius: 0.5rem;
+}
+
+/* Base Layer */
+@layer base {
+	:root {
+		--background: 0 0% 100%;
+		--foreground: 222.2 84% 4.9%;
+		--card: 0 0% 100%;
+		--card-foreground: 222.2 84% 4.9%;
+		--popover: 0 0% 100%;
+		--popover-foreground: 222.2 84% 4.9%;
+		--primary: 186 80% 25%;
+		--primary-foreground: 0 0% 100%;
+		--secondary: 180 60% 30%;
+		--secondary-foreground: 0 0% 100%;
+		--muted: 210 40% 96.1%;
+		--muted-foreground: 215.4 16.3% 46.9%;
+		--accent: 180 60% 30%;
+		--accent-foreground: 0 0% 100%;
+		--destructive: 0 84.2% 60.2%;
+		--destructive-foreground: 0 0% 100%;
+		--border: 214.3 31.8% 91.4%;
+		--input: 214.3 31.8% 91.4%;
+		--ring: 186 80% 25%;
+		--radius: 0.5rem;
+	}
+
+	.dark {
+		--background: 222.2 84% 4.9%;
+		--foreground: 210 40% 98%;
+		--card: 222.2 84% 4.9%;
+		--card-foreground: 210 40% 98%;
+		--popover: 222.2 84% 4.9%;
+		--popover-foreground: 210 40% 98%;
+		--primary: 186 80% 40%;
+		--primary-foreground: 0 0% 100%;
+		--secondary: 180 60% 35%;
+		--secondary-foreground: 0 0% 100%;
+		--muted: 217.2 32.6% 17.5%;
+		--muted-foreground: 215 20.2% 65.1%;
+		--accent: 180 60% 35%;
+		--accent-foreground: 0 0% 100%;
+		--destructive: 0 62.8% 30.6%;
+		--destructive-foreground: 210 40% 98%;
+		--border: 217.2 32.6% 17.5%;
+		--input: 217.2 32.6% 17.5%;
+		--ring: 186 80% 40%;
+	}
+
+	* {
+		border-color: var(--color-border);
+	}
+
+	html {
+		scroll-behavior: smooth;
+	}
+
+	body {
+		background-color: var(--color-background);
+		color: var(--color-foreground);
+		font-family: var(--font-sans);
+		font-feature-settings: "rlig" 1, "calt" 1;
+	}
+
+	h1, h2, h3, h4, h5, h6 {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		letter-spacing: -0.025em;
+	}
+}
+
+/* Component Layer */
+@layer components {
+	.section-padding {
+		padding-top: 4rem;
+		padding-bottom: 4rem;
+	}
+	@media (min-width: 768px) {
+		.section-padding {
+			padding-top: 6rem;
+			padding-bottom: 6rem;
+		}
+	}
+	@media (min-width: 1024px) {
+		.section-padding {
+			padding-top: 8rem;
+			padding-bottom: 8rem;
+		}
+	}
+
+	.container-narrow {
+		max-width: 56rem;
+		margin-left: auto;
+		margin-right: auto;
+		padding-left: 1rem;
+		padding-right: 1rem;
+	}
+	@media (min-width: 640px) {
+		.container-narrow {
+			padding-left: 1.5rem;
+			padding-right: 1.5rem;
+		}
+	}
+	@media (min-width: 1024px) {
+		.container-narrow {
+			padding-left: 2rem;
+			padding-right: 2rem;
+		}
+	}
+
+	.container-wide {
+		max-width: 80rem;
+		margin-left: auto;
+		margin-right: auto;
+		padding-left: 1rem;
+		padding-right: 1rem;
+	}
+	@media (min-width: 640px) {
+		.container-wide {
+			padding-left: 1.5rem;
+			padding-right: 1.5rem;
+		}
+	}
+	@media (min-width: 1024px) {
+		.container-wide {
+			padding-left: 2rem;
+			padding-right: 2rem;
+		}
+	}
+
+	.gradient-primary {
+		background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+	}
+
+	.gradient-subtle {
+		background: linear-gradient(180deg, var(--color-background) 0%, var(--color-muted) 100%);
+	}
+
+	.text-gradient {
+		background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+	}
+}
+
+/* Utility Layer */
+@layer utilities {
+	.animate-fade-in {
+		animation: fadeIn 0.6s ease-out forwards;
+	}
+
+	.animate-fade-in-up {
+		animation: fadeInUp 0.6s ease-out forwards;
+	}
+
+	.animate-slide-in-left {
+		animation: slideInLeft 0.6s ease-out forwards;
+	}
+
+	.animate-slide-in-right {
+		animation: slideInRight 0.6s ease-out forwards;
+	}
+
+	@keyframes fadeIn {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
+	}
+
+	@keyframes fadeInUp {
+		from {
+			opacity: 0;
+			transform: translateY(20px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	@keyframes slideInLeft {
+		from {
+			opacity: 0;
+			transform: translateX(-20px);
+		}
+		to {
+			opacity: 1;
+			transform: translateX(0);
+		}
+	}
+
+	@keyframes slideInRight {
+		from {
+			opacity: 0;
+			transform: translateX(20px);
+		}
+		to {
+			opacity: 1;
+			transform: translateX(0);
+		}
+	}
+}
