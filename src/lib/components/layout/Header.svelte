@@ -12,7 +12,7 @@
 
 	// Handle scroll for header background
 	function handleScroll() {
-		scrolled = window.scrollY > 20;
+		scrolled = window.scrollY > 50;
 	}
 
 	// Check if link is active
@@ -26,20 +26,36 @@
 	function closeMobileMenu() {
 		mobileMenuOpen = false;
 	}
+
+	// Check if we're on the homepage (which has a dark hero)
+	$effect(() => {
+		// This effect runs whenever the page changes
+		$page.url.pathname;
+	});
+
+	const isHomePage = $derived($page.url.pathname === '/');
+	const headerTextClass = $derived(
+		!scrolled && isHomePage ? 'text-white/80 hover:text-white' : 'text-muted-foreground hover:text-foreground'
+	);
+	const headerActiveClass = $derived(
+		!scrolled && isHomePage ? 'text-teal-400' : 'text-primary'
+	);
 </script>
 
 <svelte:window onscroll={handleScroll} />
 
 <header
 	class={cn(
-		'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-		scrolled ? 'bg-background/95 backdrop-blur-md shadow-sm border-b' : 'bg-transparent'
+		'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
+		scrolled
+			? 'bg-white/95 dark:bg-gray-900/95 backdrop-blur-md shadow-lg shadow-black/5 border-b border-gray-200/50 dark:border-gray-700/50'
+			: 'bg-transparent'
 	)}
 >
 	<nav class="container-wide flex h-16 items-center justify-between md:h-20">
 		<!-- Logo -->
 		<a href="/" class="flex items-center">
-			<Logo />
+			<Logo variant={!scrolled && isHomePage ? 'light' : 'default'} />
 		</a>
 
 		<!-- Desktop Navigation -->
@@ -50,9 +66,7 @@
 						<button
 							class={cn(
 								'flex items-center gap-1 rounded-md px-4 py-2 text-sm font-medium transition-colors',
-								isActive(item.href)
-									? 'text-primary'
-									: 'text-muted-foreground hover:text-foreground'
+								isActive(item.href) ? headerActiveClass : headerTextClass
 							)}
 						>
 							{item.title}
@@ -60,15 +74,15 @@
 						</button>
 						<!-- Dropdown -->
 						<div class="invisible absolute left-0 top-full pt-2 opacity-0 transition-all group-hover:visible group-hover:opacity-100">
-							<div class="w-64 rounded-lg border bg-background p-2 shadow-lg">
+							<div class="w-64 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-2 shadow-xl">
 								{#each item.children as child}
 									<a
 										href={child.href}
-										class="block rounded-md px-3 py-2 transition-colors hover:bg-muted"
+										class="block rounded-lg px-3 py-2 transition-colors hover:bg-gray-100 dark:hover:bg-gray-700"
 									>
-										<div class="text-sm font-medium">{child.title}</div>
+										<div class="text-sm font-medium text-gray-900 dark:text-white">{child.title}</div>
 										{#if child.description}
-											<div class="text-xs text-muted-foreground">{child.description}</div>
+											<div class="text-xs text-gray-500 dark:text-gray-400">{child.description}</div>
 										{/if}
 									</a>
 								{/each}
@@ -80,9 +94,7 @@
 						href={item.href}
 						class={cn(
 							'rounded-md px-4 py-2 text-sm font-medium transition-colors',
-							isActive(item.href)
-								? 'text-primary'
-								: 'text-muted-foreground hover:text-foreground'
+							isActive(item.href) ? headerActiveClass : headerTextClass
 						)}
 					>
 						{item.title}
@@ -93,18 +105,31 @@
 
 		<!-- Desktop CTA -->
 		<div class="hidden items-center gap-4 lg:flex">
-			<Button href="/contact" class="gradient-primary text-white">
+			<Button
+				href="/contact"
+				class={cn(
+					'transition-all duration-300',
+					scrolled
+						? 'bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-400 hover:to-cyan-400 text-white shadow-lg shadow-teal-500/25'
+						: 'bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20'
+				)}
+			>
 				Get Started
 			</Button>
 		</div>
 
 		<!-- Mobile Menu Button -->
 		<Sheet.Root bind:open={mobileMenuOpen}>
-			<Sheet.Trigger class="lg:hidden inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 hover:bg-accent hover:text-accent-foreground h-10 w-10">
+			<Sheet.Trigger
+				class={cn(
+					'lg:hidden inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 h-10 w-10',
+					!scrolled && isHomePage ? 'text-white hover:bg-white/10' : 'hover:bg-accent hover:text-accent-foreground'
+				)}
+			>
 				<Menu class="h-6 w-6" />
 				<span class="sr-only">Toggle menu</span>
 			</Sheet.Trigger>
-			<Sheet.Content side="right" class="w-full sm:w-80">
+			<Sheet.Content side="right" class="w-full sm:w-80 bg-white dark:bg-gray-900">
 				<Sheet.Header>
 					<Sheet.Title>
 						<Logo />
@@ -114,12 +139,12 @@
 					{#each siteConfig.mainNav as item}
 						{#if item.children}
 							<div class="space-y-2">
-								<span class="text-sm font-semibold text-muted-foreground">{item.title}</span>
+								<span class="text-sm font-semibold text-gray-500 dark:text-gray-400">{item.title}</span>
 								<div class="ml-4 space-y-2">
 									{#each item.children as child}
 										<a
 											href={child.href}
-											class="block text-sm text-foreground hover:text-primary"
+											class="block text-sm text-gray-700 dark:text-gray-200 hover:text-teal-600 dark:hover:text-teal-400"
 											onclick={closeMobileMenu}
 										>
 											{child.title}
@@ -132,7 +157,9 @@
 								href={item.href}
 								class={cn(
 									'text-lg font-medium transition-colors',
-									isActive(item.href) ? 'text-primary' : 'text-foreground hover:text-primary'
+									isActive(item.href)
+										? 'text-teal-600 dark:text-teal-400'
+										: 'text-gray-700 dark:text-gray-200 hover:text-teal-600 dark:hover:text-teal-400'
 								)}
 								onclick={closeMobileMenu}
 							>
@@ -140,8 +167,12 @@
 							</a>
 						{/if}
 					{/each}
-					<div class="mt-4 pt-4 border-t">
-						<Button href="/contact" class="w-full gradient-primary text-white" onclick={closeMobileMenu}>
+					<div class="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+						<Button
+							href="/contact"
+							class="w-full bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-400 hover:to-cyan-400 text-white"
+							onclick={closeMobileMenu}
+						>
 							Get Started
 						</Button>
 					</div>
@@ -150,6 +181,3 @@
 		</Sheet.Root>
 	</nav>
 </header>
-
-<!-- Spacer to prevent content from going under fixed header -->
-<div class="h-16 md:h-20"></div>

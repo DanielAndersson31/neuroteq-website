@@ -4,22 +4,27 @@
 	import * as THREE from 'three';
 	import { onMount } from 'svelte';
 
-	// Configuration
-	const NODE_COUNT = 80;
-	const CONNECTION_DISTANCE = 2.5;
-	const SPHERE_RADIUS = 4;
+	// Configuration - cluster stretched to fill viewport
+	const NODE_COUNT = 150;
+	const CONNECTION_DISTANCE = 3.5;
+	const SCALE_X = 3.2; // Horizontal stretch
+	const SCALE_Y = 2.0; // Vertical stretch
+	const SCALE_Z = 1.2; // Depth
+	const BASE_RADIUS = 5;
 
-	// Generate random positions on a sphere surface with some depth variance
+	// Generate positions on a horizontally stretched ellipsoid
 	function generateNodes(count: number): THREE.Vector3[] {
 		const nodes: THREE.Vector3[] = [];
+
 		for (let i = 0; i < count; i++) {
 			const phi = Math.acos(-1 + (2 * i) / count);
 			const theta = Math.sqrt(count * Math.PI) * phi;
-			const radius = SPHERE_RADIUS * (0.7 + Math.random() * 0.6);
+			const radius = BASE_RADIUS * (0.6 + Math.random() * 0.5);
 
-			const x = radius * Math.cos(theta) * Math.sin(phi);
-			const y = radius * Math.sin(theta) * Math.sin(phi);
-			const z = radius * Math.cos(phi);
+			// Stretched ellipsoid - wide horizontally
+			const x = radius * Math.cos(theta) * Math.sin(phi) * SCALE_X;
+			const y = radius * Math.sin(theta) * Math.sin(phi) * SCALE_Y;
+			const z = radius * Math.cos(phi) * SCALE_Z;
 
 			nodes.push(new THREE.Vector3(x, y, z));
 		}
@@ -82,7 +87,7 @@
 		void main() {
 			vSize = size;
 			vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
-			gl_PointSize = size * (200.0 / -mvPosition.z);
+			gl_PointSize = size * (250.0 / -mvPosition.z);
 			gl_Position = projectionMatrix * mvPosition;
 		}
 	`;
@@ -110,9 +115,9 @@
 	});
 
 	const lineMaterial = new THREE.LineBasicMaterial({
-		color: '#0d7377',
+		color: '#0d9488',
 		transparent: true,
-		opacity: 0.3,
+		opacity: 0.35,
 		blending: THREE.AdditiveBlending
 	});
 
@@ -138,29 +143,32 @@
 		if (!groupRef) return;
 		time += delta;
 
-		// Slow rotation
-		groupRef.rotation.y = time * 0.1 + mouseX * 0.3;
-		groupRef.rotation.x = Math.sin(time * 0.05) * 0.1 + mouseY * 0.2;
+		// Slow rotation with mouse interaction
+		groupRef.rotation.y = time * 0.08 + mouseX * 0.3;
+		groupRef.rotation.x = Math.sin(time * 0.05) * 0.08 + mouseY * 0.2;
 
 		// Pulse effect on line opacity
-		lineMaterial.opacity = 0.2 + Math.sin(time * 2) * 0.1;
+		lineMaterial.opacity = 0.3 + Math.sin(time * 2) * 0.1;
 	});
 
-	// Highlight nodes - pulsing glow effect
-	const glowNodes = nodes.slice(0, 8).map((node, i) => ({
-		position: node,
-		delay: i * 0.5,
-		scale: 0.15 + Math.random() * 0.1
-	}));
+	// Highlight nodes - pulsing glow effect across the cluster
+	const glowNodes = nodes
+		.filter((_, i) => i % 12 === 0)
+		.slice(0, 10)
+		.map((node, i) => ({
+			position: node,
+			delay: i * 0.4,
+			scale: 0.15 + Math.random() * 0.1
+		}));
 </script>
 
-<!-- Camera -->
-<T.PerspectiveCamera makeDefault position={[0, 0, 12]} fov={50}>
+<!-- Camera - positioned to frame the wide cluster -->
+<T.PerspectiveCamera makeDefault position={[0, 0, 20]} fov={60}>
 	<OrbitControls
 		enableZoom={false}
 		enablePan={false}
 		autoRotate
-		autoRotateSpeed={0.5}
+		autoRotateSpeed={0.3}
 		maxPolarAngle={Math.PI / 1.5}
 		minPolarAngle={Math.PI / 3}
 	/>
@@ -214,4 +222,4 @@
 </T.Group>
 
 <!-- Particle fog effect -->
-<T.Fog attach="fog" args={['#030712', 10, 25]} />
+<T.Fog attach="fog" args={['#030712', 12, 40]} />

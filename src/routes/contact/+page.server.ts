@@ -17,6 +17,11 @@ export const actions: Actions = {
 			return fail(400, { form });
 		}
 
+		// Validate privacy acceptance
+		if (!form.data.privacy) {
+			return message(form, 'You must accept the privacy policy', { status: 400 });
+		}
+
 		try {
 			// In production, you would send an email here
 			// For now, just log the submission

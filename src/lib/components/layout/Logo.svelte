@@ -1,14 +1,18 @@
 <script lang="ts">
 	import { cn } from '$lib/utils';
 
-	let className: string = '';
-	export { className as class };
-	export let showText = true;
+	interface Props {
+		class?: string;
+		showText?: boolean;
+		variant?: 'default' | 'light';
+	}
+
+	let { class: className = '', showText = true, variant = 'default' }: Props = $props();
 </script>
 
 <div class={cn('flex items-center gap-2', className)}>
 	<!-- Logo Mark -->
-	<div class="relative flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-primary-500 to-accent-500">
+	<div class="relative flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-teal-500 to-cyan-500 shadow-lg shadow-teal-500/25">
 		<svg
 			viewBox="0 0 24 24"
 			fill="none"
@@ -41,7 +45,11 @@
 
 	{#if showText}
 		<span class="text-xl font-bold tracking-tight">
-			<span class="text-gradient">Neuro</span><span class="text-foreground">teq</span>
+			{#if variant === 'light'}
+				<span class="bg-gradient-to-r from-teal-400 to-cyan-400 bg-clip-text text-transparent">Neuro</span><span class="text-white">teq</span>
+			{:else}
+				<span class="bg-gradient-to-r from-teal-500 to-cyan-500 bg-clip-text text-transparent">Neuro</span><span class="text-gray-900 dark:text-white">teq</span>
+			{/if}
 		</span>
 	{/if}
 </div>

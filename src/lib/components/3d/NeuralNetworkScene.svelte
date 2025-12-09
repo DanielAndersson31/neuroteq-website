@@ -21,14 +21,19 @@
 <style>
 	.neural-scene {
 		position: absolute;
-		inset: 0;
-		width: 100%;
+		top: 0;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 100vw;
 		height: 100%;
 		z-index: 0;
 		pointer-events: none;
+		overflow: hidden;
 	}
 
 	.neural-scene :global(canvas) {
 		pointer-events: auto;
+		width: 100% !important;
+		height: 100% !important;
 	}
 </style>

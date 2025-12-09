@@ -9,7 +9,9 @@
       "Bash(npm install:*)",
       "Bash(npx shadcn-svelte@latest init:*)",
       "Bash(npx shadcn-svelte@latest add:*)",
-      "Bash(npm run build:*)"
+      "Bash(npm run build:*)",
+      "Bash(npm ls:*)",
+      "Bash(npm uninstall:*)"
     ],
     "deny": [],
     "ask": []

@@ -10,31 +10,22 @@ export const contactSchema = z.object({
 		.string()
 		.email('Please enter a valid email address'),
 
-	company: z
-		.string()
-		.max(100, 'Company name must be less than 100 characters')
-		.default(''),
+	company: z.string(),
 
-	phone: z
-		.string()
-		.default(''),
+	phone: z.string(),
 
 	service: z
 		.string()
 		.min(1, 'Please select a service'),
 
-	budget: z
-		.string()
-		.default(''),
+	budget: z.string(),
 
 	message: z
 		.string()
 		.min(20, 'Message must be at least 20 characters')
 		.max(2000, 'Message must be less than 2000 characters'),
 
-	privacy: z
-		.boolean()
-		.default(false)
+	privacy: z.boolean()
 });
 
 export type ContactFormData = z.infer<typeof contactSchema>;
