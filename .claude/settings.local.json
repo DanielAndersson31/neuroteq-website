@@ -11,7 +11,8 @@
       "Bash(npx shadcn-svelte@latest add:*)",
       "Bash(npm run build:*)",
       "Bash(npm ls:*)",
-      "Bash(npm uninstall:*)"
+      "Bash(npm uninstall:*)",
+      "Bash(npm run dev:*)"
     ],
     "deny": [],
     "ask": []

@@ -74,7 +74,7 @@
 	});
 </script>
 
-<section class="section-padding bg-bg-surface relative overflow-hidden pt-8">
+<section class="section-padding bg-background relative overflow-hidden pt-8">
 	<!-- Subtle circuit pattern background -->
 	<div class="absolute inset-0 circuit-pattern opacity-5 pointer-events-none"></div>
 

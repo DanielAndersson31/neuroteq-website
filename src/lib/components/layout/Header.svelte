@@ -2,7 +2,6 @@
 	import { page } from '$app/stores';
 	import { siteConfig } from '$lib/config/site';
 	import { cn } from '$lib/utils';
-	import { Button } from '$lib/components/ui/button';
 	import * as Sheet from '$lib/components/ui/sheet';
 	import Logo from './Logo.svelte';
 	import { Menu, ChevronDown } from 'lucide-svelte';
@@ -35,7 +34,7 @@
 
 	const isHomePage = $derived($page.url.pathname === '/');
 	const headerTextClass = $derived(
-		!scrolled && isHomePage ? 'text-white/80 hover:text-primary transition-colors' : 'text-muted-foreground hover:text-primary transition-colors'
+		'text-foreground/70 hover:text-primary transition-colors'
 	);
 	const headerActiveClass = $derived('text-primary font-medium');
 </script>
@@ -50,14 +49,14 @@
 			: 'bg-transparent'
 	)}
 >
-	<nav class="container-wide flex h-16 items-center justify-between md:h-20">
+	<nav class="container-wide relative flex h-16 items-center justify-between md:h-20">
 		<!-- Logo -->
 		<a href="/" class="flex items-center">
 			<Logo variant={!scrolled && isHomePage ? 'light' : 'default'} />
 		</a>
 
-		<!-- Desktop Navigation -->
-		<div class="hidden items-center gap-1 lg:flex">
+		<!-- Desktop Navigation - Centered -->
+		<div class="hidden items-center gap-1 lg:flex absolute left-1/2 -translate-x-1/2">
 			{#each siteConfig.mainNav as item}
 				{#if item.children}
 					<div class="group relative">
@@ -101,20 +100,8 @@
 			{/each}
 		</div>
 
-		<!-- Desktop CTA - Professional style -->
-		<div class="hidden items-center gap-4 lg:flex">
-			<Button
-				href="/contact"
-				class={cn(
-					'transition-all duration-300',
-					scrolled
-						? 'btn-primary'
-						: 'btn-outline backdrop-blur-sm'
-				)}
-			>
-				Get Started
-			</Button>
-		</div>
+		<!-- Spacer for layout balance (hidden on mobile) -->
+		<div class="hidden lg:block w-20"></div>
 
 		<!-- Mobile Menu Button -->
 		<Sheet.Root bind:open={mobileMenuOpen}>
@@ -165,15 +152,6 @@
 							</a>
 						{/if}
 					{/each}
-					<div class="mt-4 pt-4 border-t border-border">
-						<Button
-							href="/contact"
-							class="w-full btn-primary"
-							onclick={closeMobileMenu}
-						>
-							Get Started
-						</Button>
-					</div>
 				</div>
 			</Sheet.Content>
 		</Sheet.Root>

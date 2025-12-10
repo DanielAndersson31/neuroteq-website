@@ -3,12 +3,13 @@
 	import * as THREE from 'three';
 	import { onMount } from 'svelte';
 
-	// Amber Color Palette
+	// Amber Color Palette for Light Theme
 	const AMBER_BRIGHT = '#fbbf24';
 	const AMBER_PRIMARY = '#f59e0b';
 	const AMBER_DARK = '#d97706';
-	const TRACE_COLOR = '#2a241b';
-	const TRACE_HIGHLIGHT = '#3d3428';
+	// Very subtle traces for clean white background
+	const TRACE_COLOR = '#e7e5e4';
+	const TRACE_HIGHLIGHT = '#d6d3d1';
 
 	// Configuration - larger board to fill screen
 	const BOARD_WIDTH = 100;
@@ -138,7 +139,7 @@
 				color: new THREE.Color(
 					colorChoice > 0.5 ? AMBER_BRIGHT : AMBER_PRIMARY
 				),
-				intensity: 0.85 + Math.random() * 0.15
+				intensity: 0.9 + Math.random() * 0.1 // Higher intensity for light theme
 			});
 		}
 		return pulses;
@@ -297,7 +298,7 @@
 		});
 	});
 
-	// Materials
+	// Materials - subtle and elegant for white theme
 	const traceMaterial = new THREE.LineBasicMaterial({
 		color: TRACE_HIGHLIGHT,
 		transparent: true,
@@ -322,8 +323,7 @@
 	}
 </script>
 
-<!-- Scene background color -->
-<T.Color attach="background" args={['#0f0d0a']} />
+<!-- Transparent background - inherits from page -->
 
 <!-- Camera - nearly top-down view filling the entire screen -->
 <T.PerspectiveCamera 
@@ -333,21 +333,21 @@
 	rotation.x={-Math.PI / 2}
 />
 
-<!-- Lighting -->
-<T.AmbientLight intensity={0.25} color="#ffffff" />
-<T.DirectionalLight position={[20, 40, 15]} intensity={0.4} color={AMBER_PRIMARY} />
-<T.DirectionalLight position={[-20, 35, -15]} intensity={0.25} color={AMBER_DARK} />
-<T.PointLight position={[0, 20, 0]} intensity={0.3} color={AMBER_BRIGHT} distance={80} />
+<!-- Lighting - adjusted for light theme -->
+<T.AmbientLight intensity={0.5} color="#ffffff" />
+<T.DirectionalLight position={[20, 40, 15]} intensity={0.6} color={AMBER_PRIMARY} />
+<T.DirectionalLight position={[-20, 35, -15]} intensity={0.3} color={AMBER_DARK} />
+<T.PointLight position={[0, 20, 0]} intensity={0.4} color={AMBER_BRIGHT} distance={80} />
 
 <!-- Circuit Board Group - flat, viewed from above -->
 <T.Group bind:ref={boardGroup}>
-	<!-- Board base (dark PCB substrate) -->
+	<!-- Board base (very subtle, nearly transparent) -->
 	<T.Mesh position={[0, -0.1, 0]} rotation.x={-Math.PI / 2}>
 		<T.PlaneGeometry args={[BOARD_WIDTH + 10, BOARD_HEIGHT + 10]} />
-		<T.MeshStandardMaterial
-			color="#1a1611"
-			roughness={0.95}
-			metalness={0.05}
+		<T.MeshBasicMaterial
+			color="#ffffff"
+			transparent
+			opacity={0.3}
 		/>
 	</T.Mesh>
 
@@ -365,9 +365,9 @@
 		>
 			<T.CircleGeometry args={[pad.size, 16]} />
 			<T.MeshBasicMaterial
-				color={pad.isActive ? AMBER_PRIMARY : TRACE_HIGHLIGHT}
+				color={pad.isActive ? AMBER_PRIMARY : TRACE_COLOR}
 				transparent
-				opacity={pad.isActive ? 0.7 : 0.4}
+				opacity={pad.isActive ? 0.8 : 0.4}
 			/>
 		</T.Mesh>
 		<!-- Pad ring -->
@@ -380,7 +380,7 @@
 				<T.MeshBasicMaterial
 					color={AMBER_DARK}
 					transparent
-					opacity={0.3}
+					opacity={0.4}
 				/>
 			</T.Mesh>
 		{/if}
@@ -395,12 +395,12 @@
 			<T.LineBasicMaterial
 				color={pulse.color}
 				transparent
-				opacity={pulse.intensity}
-				linewidth={2}
+				opacity={pulse.intensity * 1.1}
+				linewidth={3}
 			/>
 		</T.Line>
 	{/each}
 </T.Group>
 
-<!-- Fog for depth fade - adjusted for larger scene -->
-<T.Fog attach="fog" args={['#0f0d0a', 25, 80]} />
+<!-- Fog for depth fade - pure white -->
+<T.Fog attach="fog" args={['#ffffff', 30, 75]} />

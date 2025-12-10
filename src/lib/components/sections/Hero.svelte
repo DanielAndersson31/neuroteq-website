@@ -96,7 +96,7 @@
 				</Badge>
 			</div>
 
-			<!-- Headline - Clean gradient text -->
+			<!-- Headline - Dark text with amber accent -->
 			<h1 bind:this={headlineEl} class="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl text-foreground opacity-0">
 				Transform Your Business with
 				<span class="block mt-2 text-gradient">
@@ -121,15 +121,15 @@
 				</Button>
 			</div>
 
-			<!-- Trust Indicators - Refined accents -->
+			<!-- Trust Indicators - Amber accents -->
 			<div bind:this={trustEl} class="mt-16 flex flex-wrap items-center justify-center gap-8 text-sm text-muted-foreground opacity-0">
 				<div class="flex items-center gap-2 group">
 					<div class="h-2 w-2 rounded-full bg-primary pulse-subtle"></div>
 					<span class="group-hover:text-primary transition-colors">50+ Projects Delivered</span>
 				</div>
 				<div class="flex items-center gap-2 group">
-					<div class="h-2 w-2 rounded-full bg-accent pulse-subtle"></div>
-					<span class="group-hover:text-accent transition-colors">98% Client Satisfaction</span>
+					<div class="h-2 w-2 rounded-full bg-blue-500 pulse-subtle"></div>
+					<span class="group-hover:text-blue-500 transition-colors">98% Client Satisfaction</span>
 				</div>
 				<div class="flex items-center gap-2 group">
 					<div class="h-2 w-2 rounded-full bg-green-500 pulse-subtle"></div>
@@ -204,12 +204,11 @@
 		background: linear-gradient(
 			to bottom,
 			transparent 0%,
-			rgba(26, 22, 17, 0.05) 20%,
-			rgba(26, 22, 17, 0.15) 35%,
-			rgba(26, 22, 17, 0.35) 50%,
-			rgba(26, 22, 17, 0.6) 65%,
-			rgba(26, 22, 17, 0.85) 80%,
-			#1a1611 100%
+			rgba(255, 255, 255, 0.1) 20%,
+			rgba(255, 255, 255, 0.3) 40%,
+			rgba(255, 255, 255, 0.6) 60%,
+			rgba(255, 255, 255, 0.85) 80%,
+			#ffffff 100%
 		);
 	}
 </style>

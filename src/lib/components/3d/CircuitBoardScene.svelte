@@ -15,7 +15,7 @@
 		<Canvas
 			rendererParameters={{
 				antialias: true,
-				alpha: false,
+				alpha: true,
 				powerPreference: 'high-performance'
 			}}
 		>
