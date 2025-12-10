@@ -53,7 +53,7 @@
 				<ul class="mt-4 space-y-3">
 					{#each siteConfig.footerNav.services as link}
 						<li>
-							<a href={link.href} class="text-sm text-muted-foreground transition-colors hover:text-foreground">
+							<a href={link.href} class="text-sm text-muted-foreground transition-colors hover:text-primary">
 								{link.title}
 							</a>
 						</li>
@@ -67,7 +67,7 @@
 				<ul class="mt-4 space-y-3">
 					{#each siteConfig.footerNav.company as link}
 						<li>
-							<a href={link.href} class="text-sm text-muted-foreground transition-colors hover:text-foreground">
+							<a href={link.href} class="text-sm text-muted-foreground transition-colors hover:text-primary">
 								{link.title}
 							</a>
 						</li>
@@ -82,7 +82,7 @@
 					<li>
 						<a
 							href="mailto:{siteConfig.email}"
-							class="flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+							class="flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-primary"
 						>
 							<Mail class="h-4 w-4" />
 							{siteConfig.email}
@@ -91,7 +91,7 @@
 					<li>
 						<a
 							href="tel:{siteConfig.phone}"
-							class="flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+							class="flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-primary"
 						>
 							<Phone class="h-4 w-4" />
 							{siteConfig.phone}
@@ -110,7 +110,7 @@
 			</p>
 			<div class="flex gap-6">
 				{#each siteConfig.footerNav.legal as link}
-					<a href={link.href} class="text-sm text-muted-foreground transition-colors hover:text-foreground">
+					<a href={link.href} class="text-sm text-muted-foreground transition-colors hover:text-primary">
 						{link.title}
 					</a>
 				{/each}

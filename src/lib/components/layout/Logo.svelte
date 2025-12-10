@@ -11,12 +11,12 @@
 </script>
 
 <div class={cn('flex items-center gap-2', className)}>
-	<!-- Logo Mark -->
-	<div class="relative flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-teal-500 to-cyan-500 shadow-lg shadow-teal-500/25">
+	<!-- Logo Mark - Amber gradient -->
+	<div class="relative flex h-9 w-9 items-center justify-center rounded-sm bg-gradient-to-br from-amber-500 to-amber-600">
 		<svg
 			viewBox="0 0 24 24"
 			fill="none"
-			class="h-5 w-5 text-white"
+			class="h-5 w-5 text-amber-950"
 			stroke="currentColor"
 			stroke-width="2"
 			stroke-linecap="round"
@@ -45,11 +45,7 @@
 
 	{#if showText}
 		<span class="text-xl font-bold tracking-tight">
-			{#if variant === 'light'}
-				<span class="bg-gradient-to-r from-teal-400 to-cyan-400 bg-clip-text text-transparent">Neuro</span><span class="text-white">teq</span>
-			{:else}
-				<span class="bg-gradient-to-r from-teal-500 to-cyan-500 bg-clip-text text-transparent">Neuro</span><span class="text-gray-900 dark:text-white">teq</span>
-			{/if}
+			<span class="text-gradient">Neuro</span><span class="text-foreground">teq</span>
 		</span>
 	{/if}
 </div>

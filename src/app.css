@@ -1,107 +1,95 @@
 @import "tailwindcss";
 
-/* Custom CSS Variables for Neuroteq Brand */
+/* Professional Theme for Neuroteq - Amber/Orange Primary */
 @theme {
-	/* Primary - Deep Teal/Blue */
-	--color-primary-50: oklch(0.97 0.01 200);
-	--color-primary-100: oklch(0.93 0.03 200);
-	--color-primary-200: oklch(0.86 0.06 200);
-	--color-primary-300: oklch(0.76 0.09 200);
-	--color-primary-400: oklch(0.64 0.12 200);
-	--color-primary-500: oklch(0.52 0.14 200);
-	--color-primary-600: oklch(0.44 0.13 200);
-	--color-primary-700: oklch(0.37 0.11 200);
-	--color-primary-800: oklch(0.31 0.09 200);
-	--color-primary-900: oklch(0.26 0.07 200);
-	--color-primary-950: oklch(0.18 0.05 200);
+	/* Primary Amber/Orange - Warm & Innovative */
+	--color-amber-50: #fffbeb;
+	--color-amber-100: #fef3c7;
+	--color-amber-200: #fde68a;
+	--color-amber-300: #fcd34d;
+	--color-amber-400: #fbbf24;
+	--color-amber-500: #f59e0b;
+	--color-amber-600: #d97706;
+	--color-amber-700: #b45309;
+	--color-amber-800: #92400e;
+	--color-amber-900: #78350f;
 
-	/* Accent - Teal */
-	--color-accent-50: oklch(0.97 0.02 180);
-	--color-accent-100: oklch(0.93 0.04 180);
-	--color-accent-200: oklch(0.86 0.08 180);
-	--color-accent-300: oklch(0.76 0.12 180);
-	--color-accent-400: oklch(0.64 0.14 180);
-	--color-accent-500: oklch(0.52 0.15 180);
-	--color-accent-600: oklch(0.44 0.14 180);
-	--color-accent-700: oklch(0.37 0.12 180);
-	--color-accent-800: oklch(0.31 0.10 180);
-	--color-accent-900: oklch(0.26 0.08 180);
+	/* Secondary Blue - For contrast accents */
+	--color-blue-50: #eff6ff;
+	--color-blue-100: #dbeafe;
+	--color-blue-200: #bfdbfe;
+	--color-blue-300: #93c5fd;
+	--color-blue-400: #60a5fa;
+	--color-blue-500: #3b82f6;
+	--color-blue-600: #2563eb;
+	--color-blue-700: #1d4ed8;
+	--color-blue-800: #1e40af;
+	--color-blue-900: #1e3a8a;
+	--color-blue-950: #172554;
 
-	/* shadcn-svelte compatible colors */
-	--color-background: hsl(0 0% 100%);
-	--color-foreground: hsl(222.2 84% 4.9%);
-	--color-card: hsl(0 0% 100%);
-	--color-card-foreground: hsl(222.2 84% 4.9%);
-	--color-popover: hsl(0 0% 100%);
-	--color-popover-foreground: hsl(222.2 84% 4.9%);
-	--color-primary: hsl(186 80% 25%);
-	--color-primary-foreground: hsl(0 0% 100%);
-	--color-secondary: hsl(180 60% 30%);
-	--color-secondary-foreground: hsl(0 0% 100%);
-	--color-muted: hsl(210 40% 96.1%);
-	--color-muted-foreground: hsl(215.4 16.3% 46.9%);
-	--color-accent: hsl(180 60% 30%);
-	--color-accent-foreground: hsl(0 0% 100%);
-	--color-destructive: hsl(0 84.2% 60.2%);
-	--color-destructive-foreground: hsl(0 0% 100%);
-	--color-border: hsl(214.3 31.8% 91.4%);
-	--color-input: hsl(214.3 31.8% 91.4%);
-	--color-ring: hsl(186 80% 25%);
+	/* Success Green */
+	--color-green-500: #22c55e;
+	--color-green-600: #16a34a;
+
+	/* Professional Dark Backgrounds - Warmer undertone */
+	--color-bg-base: #0f0d0a;
+	--color-bg-surface: #1a1611;
+	--color-bg-card: #211c15;
+	--color-bg-elevated: #2a241b;
+
+	/* shadcn-svelte compatible colors - Amber Primary themed */
+	--color-background: #0f0d0a;
+	--color-foreground: #f5f0e8;
+	--color-card: #211c15;
+	--color-card-foreground: #f5f0e8;
+	--color-popover: #1a1611;
+	--color-popover-foreground: #f5f0e8;
+	--color-primary: #f59e0b;
+	--color-primary-foreground: #0f0d0a;
+	--color-secondary: #fbbf24;
+	--color-secondary-foreground: #0f0d0a;
+	--color-muted: #2a241b;
+	--color-muted-foreground: #a39585;
+	--color-accent: #3b82f6;
+	--color-accent-foreground: #ffffff;
+	--color-destructive: #f87171;
+	--color-destructive-foreground: #ffffff;
+	--color-border: #3d3428;
+	--color-input: #3d3428;
+	--color-ring: #f59e0b;
 
 	/* Font Families */
 	--font-sans: "Inter", system-ui, -apple-system, sans-serif;
 	--font-heading: "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
 	--font-mono: "JetBrains Mono", "Fira Code", monospace;
 
-	/* Radius */
-	--radius: 0.5rem;
+	/* Radius - Slightly rounded for professional feel */
+	--radius: 0.375rem;
 }
 
-/* Base Layer */
+/* Base Layer - Warm Dark Theme */
 @layer base {
 	:root {
-		--background: 0 0% 100%;
-		--foreground: 222.2 84% 4.9%;
-		--card: 0 0% 100%;
-		--card-foreground: 222.2 84% 4.9%;
-		--popover: 0 0% 100%;
-		--popover-foreground: 222.2 84% 4.9%;
-		--primary: 186 80% 25%;
-		--primary-foreground: 0 0% 100%;
-		--secondary: 180 60% 30%;
-		--secondary-foreground: 0 0% 100%;
-		--muted: 210 40% 96.1%;
-		--muted-foreground: 215.4 16.3% 46.9%;
-		--accent: 180 60% 30%;
+		--background: 30 20% 4%;
+		--foreground: 35 30% 95%;
+		--card: 30 20% 10%;
+		--card-foreground: 35 30% 95%;
+		--popover: 30 20% 8%;
+		--popover-foreground: 35 30% 95%;
+		--primary: 38 92% 50%;
+		--primary-foreground: 30 20% 4%;
+		--secondary: 45 93% 56%;
+		--secondary-foreground: 30 20% 4%;
+		--muted: 30 18% 14%;
+		--muted-foreground: 30 15% 55%;
+		--accent: 217 91% 60%;
 		--accent-foreground: 0 0% 100%;
-		--destructive: 0 84.2% 60.2%;
+		--destructive: 0 84% 60%;
 		--destructive-foreground: 0 0% 100%;
-		--border: 214.3 31.8% 91.4%;
-		--input: 214.3 31.8% 91.4%;
-		--ring: 186 80% 25%;
-		--radius: 0.5rem;
-	}
-
-	.dark {
-		--background: 222.2 84% 4.9%;
-		--foreground: 210 40% 98%;
-		--card: 222.2 84% 4.9%;
-		--card-foreground: 210 40% 98%;
-		--popover: 222.2 84% 4.9%;
-		--popover-foreground: 210 40% 98%;
-		--primary: 186 80% 40%;
-		--primary-foreground: 0 0% 100%;
-		--secondary: 180 60% 35%;
-		--secondary-foreground: 0 0% 100%;
-		--muted: 217.2 32.6% 17.5%;
-		--muted-foreground: 215 20.2% 65.1%;
-		--accent: 180 60% 35%;
-		--accent-foreground: 0 0% 100%;
-		--destructive: 0 62.8% 30.6%;
-		--destructive-foreground: 210 40% 98%;
-		--border: 217.2 32.6% 17.5%;
-		--input: 217.2 32.6% 17.5%;
-		--ring: 186 80% 40%;
+		--border: 30 18% 18%;
+		--input: 30 18% 18%;
+		--ring: 38 92% 50%;
+		--radius: 0.375rem;
 	}
 
 	* {
@@ -185,19 +173,124 @@
 		}
 	}
 
+	/* Professional Gradients - Amber Primary */
 	.gradient-primary {
-		background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+		background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
 	}
 
 	.gradient-subtle {
-		background: linear-gradient(180deg, var(--color-background) 0%, var(--color-muted) 100%);
+		background: linear-gradient(180deg, #0f0d0a 0%, #1a1611 100%);
 	}
 
+	/* Clean Text Gradients (no glow) - Amber */
 	.text-gradient {
-		background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+		background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
 		background-clip: text;
+	}
+
+	.text-gradient-warm {
+		background: linear-gradient(135deg, #d97706 0%, #f59e0b 50%, #fbbf24 100%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+	}
+
+	/* Professional Card Styles - Warm theme */
+	.card-elevated {
+		background: #211c15;
+		border: 1px solid #3d3428;
+		border-radius: 0.5rem;
+		transition: all 0.3s ease;
+	}
+
+	.card-elevated:hover {
+		border-color: #f59e0b;
+		box-shadow: 0 4px 12px rgba(245, 158, 11, 0.1);
+		transform: translateY(-2px);
+	}
+
+	/* Featured card with amber accent */
+	.card-featured {
+		background: #211c15;
+		border: 1px solid #3d3428;
+		border-left: 3px solid #f59e0b;
+		border-radius: 0.5rem;
+	}
+
+	/* Professional Button Styles - Amber Primary */
+	.btn-primary {
+		background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+		color: #0f0d0a;
+		font-weight: 600;
+		border-radius: 0.375rem;
+		transition: all 0.2s ease;
+		box-shadow: 0 4px 14px rgba(245, 158, 11, 0.25);
+	}
+
+	.btn-primary:hover {
+		box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+		transform: translateY(-1px);
+	}
+
+	.btn-outline {
+		background: transparent;
+		border: 1px solid #3d3428;
+		color: #f5f0e8;
+		font-weight: 500;
+		border-radius: 0.375rem;
+		transition: all 0.2s ease;
+	}
+
+	.btn-outline:hover {
+		background: rgba(245, 158, 11, 0.1);
+		border-color: #f59e0b;
+		color: #fbbf24;
+	}
+
+	/* Blue Accent Button (for secondary CTAs) */
+	.btn-accent {
+		background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+		color: #ffffff;
+		font-weight: 600;
+		border-radius: 0.375rem;
+		transition: all 0.2s ease;
+		box-shadow: 0 4px 14px rgba(59, 130, 246, 0.25);
+	}
+
+	.btn-accent:hover {
+		box-shadow: 0 6px 20px rgba(59, 130, 246, 0.35);
+		transform: translateY(-1px);
+	}
+
+	/* Stat highlight with amber */
+	.stat-highlight {
+		color: #f59e0b;
+	}
+
+	/* Subtle pulse animation (scale-based, not glow) */
+	.pulse-subtle {
+		animation: pulseSubtle 2s ease-in-out infinite;
+	}
+
+	@keyframes pulseSubtle {
+		0%, 100% {
+			transform: scale(1);
+			opacity: 1;
+		}
+		50% {
+			transform: scale(1.1);
+			opacity: 0.8;
+		}
+	}
+
+	/* Circuit pattern for hero background (warm amber tones) */
+	.circuit-pattern {
+		background-image:
+			linear-gradient(90deg, rgba(245, 158, 11, 0.03) 1px, transparent 1px),
+			linear-gradient(rgba(245, 158, 11, 0.03) 1px, transparent 1px);
+		background-size: 60px 60px;
 	}
 }
 
@@ -259,5 +352,16 @@
 			opacity: 1;
 			transform: translateX(0);
 		}
+	}
+}
+
+/* Accessibility: Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
 	}
 }

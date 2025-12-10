@@ -35,11 +35,9 @@
 
 	const isHomePage = $derived($page.url.pathname === '/');
 	const headerTextClass = $derived(
-		!scrolled && isHomePage ? 'text-white/80 hover:text-white' : 'text-muted-foreground hover:text-foreground'
+		!scrolled && isHomePage ? 'text-white/80 hover:text-primary transition-colors' : 'text-muted-foreground hover:text-primary transition-colors'
 	);
-	const headerActiveClass = $derived(
-		!scrolled && isHomePage ? 'text-teal-400' : 'text-primary'
-	);
+	const headerActiveClass = $derived('text-primary font-medium');
 </script>
 
 <svelte:window onscroll={handleScroll} />
@@ -48,7 +46,7 @@
 	class={cn(
 		'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
 		scrolled
-			? 'bg-white/95 dark:bg-gray-900/95 backdrop-blur-md shadow-lg shadow-black/5 border-b border-gray-200/50 dark:border-gray-700/50'
+			? 'bg-background/95 backdrop-blur-md border-b border-border'
 			: 'bg-transparent'
 	)}
 >
@@ -72,17 +70,17 @@
 							{item.title}
 							<ChevronDown class="h-4 w-4 transition-transform group-hover:rotate-180" />
 						</button>
-						<!-- Dropdown -->
+						<!-- Dropdown - Professional style -->
 						<div class="invisible absolute left-0 top-full pt-2 opacity-0 transition-all group-hover:visible group-hover:opacity-100">
-							<div class="w-64 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-2 shadow-xl">
+							<div class="w-64 rounded-md border border-border bg-card/95 backdrop-blur-md p-2 shadow-lg">
 								{#each item.children as child}
 									<a
 										href={child.href}
-										class="block rounded-lg px-3 py-2 transition-colors hover:bg-gray-100 dark:hover:bg-gray-700"
+										class="block rounded-md px-3 py-2 transition-colors hover:bg-primary/10"
 									>
-										<div class="text-sm font-medium text-gray-900 dark:text-white">{child.title}</div>
+										<div class="text-sm font-medium text-foreground">{child.title}</div>
 										{#if child.description}
-											<div class="text-xs text-gray-500 dark:text-gray-400">{child.description}</div>
+											<div class="text-xs text-muted-foreground">{child.description}</div>
 										{/if}
 									</a>
 								{/each}
@@ -103,15 +101,15 @@
 			{/each}
 		</div>
 
-		<!-- Desktop CTA -->
+		<!-- Desktop CTA - Professional style -->
 		<div class="hidden items-center gap-4 lg:flex">
 			<Button
 				href="/contact"
 				class={cn(
 					'transition-all duration-300',
 					scrolled
-						? 'bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-400 hover:to-cyan-400 text-white shadow-lg shadow-teal-500/25'
-						: 'bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20'
+						? 'btn-primary'
+						: 'btn-outline backdrop-blur-sm'
 				)}
 			>
 				Get Started
@@ -122,14 +120,14 @@
 		<Sheet.Root bind:open={mobileMenuOpen}>
 			<Sheet.Trigger
 				class={cn(
-					'lg:hidden inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 h-10 w-10',
-					!scrolled && isHomePage ? 'text-white hover:bg-white/10' : 'hover:bg-accent hover:text-accent-foreground'
+					'lg:hidden inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary h-10 w-10',
+					!scrolled && isHomePage ? 'text-white hover:bg-primary/10' : 'text-primary hover:bg-primary/10'
 				)}
 			>
 				<Menu class="h-6 w-6" />
 				<span class="sr-only">Toggle menu</span>
 			</Sheet.Trigger>
-			<Sheet.Content side="right" class="w-full sm:w-80 bg-white dark:bg-gray-900">
+			<Sheet.Content side="right" class="w-full sm:w-80 bg-background border-l border-border">
 				<Sheet.Header>
 					<Sheet.Title>
 						<Logo />
@@ -139,12 +137,12 @@
 					{#each siteConfig.mainNav as item}
 						{#if item.children}
 							<div class="space-y-2">
-								<span class="text-sm font-semibold text-gray-500 dark:text-gray-400">{item.title}</span>
+								<span class="text-sm font-semibold text-muted-foreground">{item.title}</span>
 								<div class="ml-4 space-y-2">
 									{#each item.children as child}
 										<a
 											href={child.href}
-											class="block text-sm text-gray-700 dark:text-gray-200 hover:text-teal-600 dark:hover:text-teal-400"
+											class="block text-sm text-muted-foreground hover:text-primary transition-colors"
 											onclick={closeMobileMenu}
 										>
 											{child.title}
@@ -158,8 +156,8 @@
 								class={cn(
 									'text-lg font-medium transition-colors',
 									isActive(item.href)
-										? 'text-teal-600 dark:text-teal-400'
-										: 'text-gray-700 dark:text-gray-200 hover:text-teal-600 dark:hover:text-teal-400'
+										? 'text-primary'
+										: 'text-foreground hover:text-primary'
 								)}
 								onclick={closeMobileMenu}
 							>
@@ -167,10 +165,10 @@
 							</a>
 						{/if}
 					{/each}
-					<div class="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+					<div class="mt-4 pt-4 border-t border-border">
 						<Button
 							href="/contact"
-							class="w-full bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-400 hover:to-cyan-400 text-white"
+							class="w-full btn-primary"
 							onclick={closeMobileMenu}
 						>
 							Get Started

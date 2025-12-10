@@ -47,7 +47,7 @@
 
 		<div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
 			{#each service.features as feature, i}
-				<Card.Root class="transition-all duration-300 hover:shadow-md hover:-translate-y-1">
+				<Card.Root class="transition-all duration-300 hover:shadow-md hover:-translate-y-1 hover:border-primary/50">
 					<Card.Header>
 						<div class="flex items-center gap-3">
 							<div class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary font-bold">
